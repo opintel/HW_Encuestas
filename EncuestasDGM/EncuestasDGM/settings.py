@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!f+$gof-@c)-b8-_xt)@1y*#pxj*ny0-qcdi^xhz!7ewo7o)-p'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'EncuestasDGM.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('POSTGRESENCUESTA_ENV_POSTGRES_DB', 'encuestas'),
-        'USER': os.environ.get('POSTGRESENCUESTA_ENV_POSTGRES_USER', 'encuestas'),
-        'PASSWORD': os.environ.get('POSTGRESENCUESTA_ENV_POSTGRES_PASSWORD', 'mysecurepass'),
-        'HOST': os.environ.get('POSTGRESENCUESTA_PORT_5432_TCP_ADDR', '0.0.0.0'),
-        'PORT': os.environ.get('POSTGRESENCUESTA_PORT_5432_TCP_PORT', '5433')
+        'NAME': os.environ.get('POSTGRESENCUESTA_ENV_POSTGRES_DB'),
+        'USER': os.environ.get('POSTGRESENCUESTA_ENV_POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRESENCUESTA_ENV_POSTGRES_PASSWORD'),
+        'HOST': os.environ.get('POSTGRESENCUESTA_PORT_5432_TCP_ADDR'),
+        'PORT': os.environ.get('POSTGRESENCUESTA_PORT_5432_TCP_PORT')
     }
 }
 
@@ -134,4 +134,4 @@ STATICFILES_DIRS = [
 ]
 
 # MOONGO ENGINE CONFIG
-connect(os.environ.get('MONGO_DB', 'encuesta_dgm'), host=os.environ.get('MONGOENCUESTAS_PORT_27017_TCP_ADDR', '0.0.0.0'), port=int(os.environ.get('MONGOENCUESTAS_PORT_27017_TCP_PORT', 27017)))
+connect(os.environ.get('MONGO_DB'), host=os.environ.get('MONGOENCUESTAS_PORT_27017_TCP_ADDR'), port=int(os.environ.get('MONGOENCUESTAS_PORT_27017_TCP_PORT')))

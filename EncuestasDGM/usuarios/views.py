@@ -42,7 +42,7 @@ def login_view(request):
                 error = 'La cuenta ha sido deshabilitada'
             # Logueo y creacion de la sesion
             login(request, user)
-            return redirect('/')
+            return redirect(request.POST.get('next'))
 
     return render(request, 'usuarios/login.html', {'form': form, 'error': error})
 
