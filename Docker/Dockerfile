@@ -5,7 +5,8 @@ RUN apk add git bash postgresql-dev gcc musl-dev python-dev --update-cache && rm
 
 RUN mkdir /project && \
     git clone https://github.com/vaquer/EncuestasDGM.git /project && \
-    pip install -r /project/requirements.txt
+    pip install -r /project/requirements.txt && \
+    python project/EncuestasDGM/manage.py migrate
 
 EXPOSE 8001
 
