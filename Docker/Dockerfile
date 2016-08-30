@@ -5,10 +5,9 @@ RUN apk add git bash postgresql-dev gcc musl-dev python-dev --update-cache && rm
 
 RUN mkdir /project && \
     git clone https://github.com/vaquer/EncuestasDGM.git /project && \
-    pip install -r /project/requirements.txt && \
-    python project/EncuestasDGM/manage.py migrate && \
-    python project/EncuestasDGM/encuestas/create_user_admin.py
+    pip install -r /project/requirements.txt
 
 EXPOSE 8001
+ADD start.sh /start.sh
 
-CMD ["python", "project/EncuestasDGM/manage.py", "runserver", "0.0.0.0:8001"]
+ENTRYPOINT /start.sh
