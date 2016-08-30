@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Script de creacion de usuario administrador
-inicial de la aplicacion
-"""
 import os
 import sys
 import datetime

@@ -88,9 +88,8 @@ class Encuesta(Document):
                     if valores['label'] == pregunta:
                         valores[preguntas[pregunta].opciones[int(resultado) - 1]] += 1
 
-        elemento_aux = []
-
         for elemento in respuesta_de_barchart['valores']:
+            elemento_aux = []
             elemento_aux.append([elemento['label'], 'valor'])
             for opcion in elemento.keys():
                 if opcion != 'label' and opcion != 'valoresarray' and opcion:
