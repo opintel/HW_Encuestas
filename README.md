@@ -42,7 +42,7 @@ En el servidor aplicativo construimos la imagen del contenedor:
 ### Uso
 Una vez construida la imagen Docker de la herramienta, ya es posible generar el contenedor donde estara ejecutandose la herramienta. Un punto a considerar antes de avanzar con la creación del contenedor es que hace uso de la tecnologia **MongoDB** como motor de base de datos NO RELACIONAL, donde se almacenan los datos relacionados con las encuestas, por lo que se necesita crear un contenedor Docker con **MongoDB** y conectarlo al contenedor aplicativo.
 
-Otro punto importante es que usa **PostgreSQL** como base de datos RELACIONAL, para guardar y gestionar los usuarios administradores de la herramienta. Debido a esto es necesario crear ademas un contenedor Docker con **PostgreSQL** y ligarlo al contenedir aplicativo.
+Otro punto importante de la aplicación es el uso de **PostgreSQL** como base de datos RELACIONAL, donde guarda la información de los usuarios administradores de la herramienta. Debido a esto es necesario crear ademas un contenedor Docker con **PostgreSQL** y ligarlo al contenedir aplicativo.
 
 Los comandos de consola para correr la aplicacion con toda la arquitectura necesaria son los siguientes:
 ```
