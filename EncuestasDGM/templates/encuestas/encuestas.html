@@ -13,7 +13,15 @@
             <div ng-repeat-start="post in posts" class="col-md-6 post-item ng-scope">
                 <div class="inner">
                     <a href="/encuestas/responde/{{encuesta.slug}}/">
-                        <img class="ng-scope" src="http://datos.gob.mx/public/img/uploads/5768ab1168f81c6e0052015f/UuDgZpqE7VvEYnoZ.png">
+                        {% if forloop.counter|divisibleby:"2" %}
+                            <img class="ng-scope" src="http://datos.gob.mx/public/img/uploads/5768ab1168f81c6e0052015f/UuDgZpqE7VvEYnoZ.png">
+                        {% comment %}
+                        {% elif forloop.counter|divisibleby:"3" %}
+                            <img class="ng-scope" src="http://datos.gob.mx/public/img/uploads/57a377c49e24ba6a00e30d85/hO3Ho8ZlrUVD27nM.png">
+                        {% endcomment %}
+                        {% else %}
+                            <img class="ng-scope" src="http://datos.gob.mx/public/img/uploads/5768ab1168f81c6e00520199/byPdEk5FT3orPy6I.png">
+                        {% endif %}
                     </a>
                 </div>
                 <div class="post-info ng-scope">
