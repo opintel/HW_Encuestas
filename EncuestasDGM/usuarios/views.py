@@ -42,7 +42,7 @@ def login_view(request):
                 error = 'La cuenta ha sido deshabilitada'
             # Logueo y creacion de la sesion
             login(request, user)
-            return redirect(request.POST.get('next'))
+            return redirect('/encuestas/administrador/')
 
     return render(request, 'usuarios/login.html', {'form': form, 'error': error})
 
@@ -54,7 +54,7 @@ def logout_view(request):
     URL: /usuarios/logout/
     """
     logout(request)
-    return redirect('/')
+    return redirect('/encuestas/')
 
 
 def generate_password_reset(request):
