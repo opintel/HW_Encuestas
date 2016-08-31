@@ -52,6 +52,7 @@ Los comandos de consola para correr la aplicacion con toda la arquitectura neces
         -e POSTGRES_HOST="{{host}}" \
         -e POSTGRES_PORT="{{port}}" \
         -e MONGO_DB="{{mongo_db}}" \
+        -e SECRET_KEY='{{tu_secret_key}}' \
         --link postgres-encuesta:postgresencuesta \
         --link mongo-encuestas:mongoencuestas \
         -p 8001:8001 \
