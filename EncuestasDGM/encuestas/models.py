@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 import json
 from collections import OrderedDict
-from datetime import datetime
+from django.utils import timezone
 from mongoengine import *
 
 
@@ -14,12 +14,12 @@ class Pregunta(EmbeddedDocument):
 class Respuesta(EmbeddedDocument):
     pregunta = StringField(max_length=300, required=True)
     valor = StringField(max_length=500, required=False)
-    fecha = DateTimeField(default=datetime.now())
+    fecha = DateTimeField(default=timezone.now())
     hash_respuesta = StringField(max_length=200)
 
     def save(self, *args, **kwargs):
         if not self.fecha:
-            self.fecha = datetime.now()
+            self.fecha = timezone.localtime(timezone.now())
 
         return super(Respuesta, self).save(*args, **kwargs)
 
@@ -27,8 +27,8 @@ class Encuesta(Document):
     titulo = StringField(max_length=200, required=True)
     slug = StringField(max_length=250, required=True)
     encabezado = StringField(max_length=500, required=True)
-    fecha_creacion = DateTimeField(default=datetime.now())
-    fecha_modificacion = DateTimeField(default=datetime.now())
+    fecha_creacion = DateTimeField(default=timezone.now())
+    fecha_modificacion = DateTimeField(default=timezone.now())
     publicada = BooleanField(default=False)
     abierta = BooleanField(default=False)
     preguntas = ListField(EmbeddedDocumentField(Pregunta))
@@ -39,9 +39,10 @@ class Encuesta(Document):
         preguntas_resultados = { pregunta.texto: {'pregunta': None, 'valores': [], 'opciones': None} for pregunta in self.preguntas}
 
         for respuesta in self.respuestas:
-            preguntas_resultados[respuesta.pregunta]['abierta'] = True if len(preguntas[respuesta.pregunta].opciones) == 0 else False
-            preguntas_resultados[respuesta.pregunta]['opciones'] = preguntas[respuesta.pregunta].opciones
-            preguntas_resultados[respuesta.pregunta]['valores'].append(respuesta.valor)
+            if preguntas_resultados.get(respuesta.pregunta, None) is not None:
+                preguntas_resultados[respuesta.pregunta]['abierta'] = True if len(preguntas[respuesta.pregunta].opciones) == 0 else False
+                preguntas_resultados[respuesta.pregunta]['opciones'] = preguntas[respuesta.pregunta].opciones
+                preguntas_resultados[respuesta.pregunta]['valores'].append(respuesta.valor)
 
         return preguntas_resultados
 
@@ -61,8 +62,9 @@ class Encuesta(Document):
         preguntas_resultados = { pregunta.texto: [] for pregunta in self.preguntas}
 
         for respuesta in self.respuestas:
-            if len(preguntas[respuesta.pregunta].opciones) > 0:
-                preguntas_resultados[respuesta.pregunta].append(respuesta.valor)
+            if preguntas.get(respuesta.pregunta, None) is not None:
+                if len(preguntas[respuesta.pregunta].opciones) > 0:
+                    preguntas_resultados[respuesta.pregunta].append(respuesta.valor)
 
         for pregunta in self.preguntas:
             if len(pregunta.opciones) > 0:
@@ -101,7 +103,7 @@ class Encuesta(Document):
 
     def save(self, *args, **kwargs):
         if not self.fecha_creacion:
-            self.fecha_creacion = datetime.now()
-        self.fecha_modificacion = datetime.now()
+            self.fecha_creacion = timezone.localtime(timezone.now())
+        self.fecha_modificacion = timezone.localtime(timezone.now())
 
         return super(Encuesta, self).save(*args, **kwargs)

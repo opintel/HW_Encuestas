@@ -20,7 +20,7 @@
             {% csrf_token %}
             <div class="preguntas-form">
                 {% for pregunta in encuesta.preguntas %}
-                    <div class="row pregunta">
+                    <div class="row pregunta {% if pregunta.opciones %}cerrada{% else %}abierta{% endif %}">
                         <div class="col-sm-8">
                             <label class="texto-pregunta" link="{{pregunta.texto}}">{{pregunta.texto}}</label><br>
                             {% if pregunta.opciones %}
@@ -90,7 +90,7 @@
                     type: "success"
                     },
                     function(){
-                      window.location = "http://datos.gob.mx/";
+                      window.location = "/encuestas/";
                     });
                 } else {
                     swal({
