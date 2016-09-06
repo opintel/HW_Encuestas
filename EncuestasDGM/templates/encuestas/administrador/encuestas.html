@@ -69,6 +69,25 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <p class="text-center">
+            <ul class="pagination ng-isolate-scope ng-not-empty ng-valid ng-dirty ng-valid-parse">
+                {% if pagina.has_previous %}
+                <li class="pagination-first ng-scope">
+                    <a href="/encuestas/administrador/p/{{pagina.previous_page_number}}" class="ng-binding">«</a>
+                </li>
+                {% endif %}
+  
+                <li class="pagination-page ng-scope">
+                    <a href="." >{{page_number}}</a>
+                </li>
+
+                {% if pagina.has_next %}
+                    <li class="pagination-next ng-scope">
+                        <a href="/encuestas/administrador/p/{{pagina.next_page_number}}" class="ng-binding">›</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </p>
         </div>
     {% else %}
         <h3>Por el momento no existen encuestas creadas. Crea tu primer encuesta <a href="/encuestas/administrador/crear-encuesta/">aqui.</a></h3>

@@ -29,7 +29,7 @@ def administrador_encuestas(request, page=1):
         except EmptyPage:
             pagina_encuestas = False
 
-    return render(request, 'encuestas/administrador/encuestas.html', {'pagina': pagina_encuestas})
+    return render(request, 'encuestas/administrador/encuestas.html', {'pagina': pagina_encuestas, 'page_number': page})
 
 
 @login_required(login_url='/encuestas/usuarios/login/')
