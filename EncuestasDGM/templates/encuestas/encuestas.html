@@ -35,8 +35,12 @@
                     </p>
                 </div>
             </div>
+            {% if forloop.counter|divisibleby:2 %}
+                <div class="clearfix ng-scope"></div>
+            {% endif %}
         {% endfor %}
-        <p class="text-center">
+    </div>
+    <div class="text-center">
             <ul class="pagination ng-isolate-scope ng-not-empty ng-valid ng-dirty ng-valid-parse">
                 {% if encuestas.has_previous %}
                 <li class="pagination-first ng-scope">
@@ -55,6 +59,5 @@
                     </li>
                 {% endif %}
             </ul>
-        </p>
-    </div>
+        </div>
 {% endblock %}
