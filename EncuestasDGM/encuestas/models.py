@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 import json
 from collections import OrderedDict
-from django.utils import timezone
+from datetime import datetime
 from mongoengine import *
 
 
@@ -14,12 +14,12 @@ class Pregunta(EmbeddedDocument):
 class Respuesta(EmbeddedDocument):
     pregunta = StringField(max_length=300, required=True)
     valor = StringField(max_length=500, required=False)
-    fecha = DateTimeField(default=timezone.now())
+    fecha = DateTimeField(default=datetime.utcnow())
     hash_respuesta = StringField(max_length=200)
 
     def save(self, *args, **kwargs):
         if not self.fecha:
-            self.fecha = timezone.localtime(timezone.now())
+            self.fecha = datetime.utcnow()
 
         return super(Respuesta, self).save(*args, **kwargs)
 
@@ -27,8 +27,8 @@ class Encuesta(Document):
     titulo = StringField(max_length=200, required=True)
     slug = StringField(max_length=250, required=True)
     encabezado = StringField(max_length=500, required=True)
-    fecha_creacion = DateTimeField(default=timezone.now())
-    fecha_modificacion = DateTimeField(default=timezone.now())
+    fecha_creacion = DateTimeField(default=datetime.utcnow())
+    fecha_modificacion = DateTimeField(default=datetime.utcnow())
     publicada = BooleanField(default=False)
     abierta = BooleanField(default=False)
     preguntas = ListField(EmbeddedDocumentField(Pregunta))
@@ -103,7 +103,7 @@ class Encuesta(Document):
 
     def save(self, *args, **kwargs):
         if not self.fecha_creacion:
-            self.fecha_creacion = timezone.localtime(timezone.now())
-        self.fecha_modificacion = timezone.localtime(timezone.now())
+            self.fecha_creacion = datetime.utcnow()
+        self.fecha_modificacion = datetime.utcnow()
 
         return super(Encuesta, self).save(*args, **kwargs)
