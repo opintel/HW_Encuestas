@@ -50,9 +50,9 @@
                         {% comment %}
                             |date:"d/m/Y"
                         {% endcomment %}
-                        {% localtime on %}
+                        {% timezone 'America/Mexico_City' %}
                             <td>{{encuesta.fecha_creacion}}</td>
-                        {% endlocaltime %}
+                        {% endtimezone %}
                         <td>
                             {% if encuesta.publicada %}
                                 <span class="glyphicon glyphicon-ok" style="margin-left: 25px; color: #0c9;"></span>
