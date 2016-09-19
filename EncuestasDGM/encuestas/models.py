@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import json
+import pytz
 from collections import OrderedDict
 from datetime import datetime
 from django.utils import timezone
@@ -46,6 +47,9 @@ class Encuesta(Document):
                 preguntas_resultados[respuesta.pregunta]['valores'].append(respuesta.valor)
 
         return preguntas_resultados
+
+    def devuelve_fecha_local(self):
+        return timezone.localtime(self.fecha_creacion.replace(tzinfo=pytz.utc))
 
     def devuelve_respuestas_abiertas(self):
         preguntas = { pregunta.texto: pregunta for pregunta in self.preguntas}
