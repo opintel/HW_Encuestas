@@ -107,4 +107,5 @@ class Encuesta(Document):
             self.fecha_creacion = timezone.localtime(timezone.now())
         self.fecha_modificacion = timezone.localtime(timezone.now())
 
+        print timezone.localtime(timezone.now())
         return super(Encuesta, self).save(*args, **kwargs)
