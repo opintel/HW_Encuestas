@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import json
 from collections import OrderedDict
 from datetime import datetime
+from django.utils import timezone
 from mongoengine import *
 
 
@@ -19,7 +20,7 @@ class Respuesta(EmbeddedDocument):
 
     def save(self, *args, **kwargs):
         if not self.fecha:
-            self.fecha = datetime.utcnow()
+            self.fecha = timezone.localtime(timezone.now())
 
         return super(Respuesta, self).save(*args, **kwargs)
 
@@ -103,7 +104,7 @@ class Encuesta(Document):
 
     def save(self, *args, **kwargs):
         if not self.fecha_creacion:
-            self.fecha_creacion = datetime.utcnow()
-        self.fecha_modificacion = datetime.utcnow()
+            self.fecha_creacion = timezone.localtime(timezone.now())
+        self.fecha_modificacion = timezone.localtime(timezone.now())
 
         return super(Encuesta, self).save(*args, **kwargs)
