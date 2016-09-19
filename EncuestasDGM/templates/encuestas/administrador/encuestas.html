@@ -46,7 +46,12 @@
                     <tr>
                         <td><a href="/encuestas/administrador/editar-encuesta/{{encuesta.slug}}/">{{encuesta.titulo}}</a></td>
                         <td>{{encuesta.encabezado|truncatewords:5}}</td>
-                        <td>{{encuesta.fecha_creacion|date:"d/m/Y"}}</td>
+                        {% comment %}
+                            |date:"d/m/Y"
+                        {% endcomment %}
+                        {% localtime on %}
+                            <td>{{encuesta.fecha_creacion}}</td>
+                        {% endlocaltime %}
                         <td>
                             {% if encuesta.publicada %}
                                 <span class="glyphicon glyphicon-ok" style="margin-left: 25px; color: #0c9;"></span>
