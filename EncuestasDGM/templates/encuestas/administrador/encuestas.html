@@ -36,7 +36,7 @@
                     <tr>
                         <th>Encuesta</th>
                         <th>Descripción</th>
-                        <th>Fecha</th>
+                        <th>Creación</th>
                         <th>Publicada</th>
                         <th>Abierta</th>
                         <th>Resultados</th>
@@ -47,7 +47,10 @@
                     <tr>
                         <td><a href="/encuestas/administrador/editar-encuesta/{{encuesta.slug}}/">{{encuesta.titulo}}</a></td>
                         <td>{{encuesta.encabezado|truncatewords:5}}</td>
-                            <td>{{encuesta.devuelve_fecha_local|date:"d/m/Y"}}</td>
+                            {% comment %}
+                                |date:"d/m/Y"
+                            {% endcomment %}
+                            <td>{{encuesta.devuelve_fecha_local}}</td>
                         <td>
                             {% if encuesta.publicada %}
                                 <span class="glyphicon glyphicon-ok" style="margin-left: 25px; color: #0c9;"></span>
