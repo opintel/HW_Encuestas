@@ -29,8 +29,8 @@ class Encuesta(Document):
     titulo = StringField(max_length=200, required=True)
     slug = StringField(max_length=250, required=True)
     encabezado = StringField(max_length=500, required=True)
-    fecha_creacion = DateTimeField(auto_now_add=True)
-    fecha_modificacion = DateTimeField(auto_now=True)
+    fecha_creacion = DateTimeField(default=timezone.localtime(timezone.now()))
+    fecha_modificacion = DateTimeField(default=timezone.localtime(timezone.now()))
     publicada = BooleanField(default=False)
     abierta = BooleanField(default=False)
     preguntas = ListField(EmbeddedDocumentField(Pregunta))
@@ -106,9 +106,9 @@ class Encuesta(Document):
 
         return respuesta_de_barchart
 
-    #def save(self, *args, **kwargs):
-        #if not self.fecha_creacion:
-        #    self.fecha_creacion = timezone.localtime(timezone.now())
-        #self.fecha_modificacion = timezone.localtime(timezone.now())
+    def save(self, *args, **kwargs):
+        if not self.fecha_creacion:
+            self.fecha_creacion = timezone.now().replace(tzinfo=pytz.utc)
+        self.fecha_modificacion = timezone.now().replace(tzinfo=pytz.utc)
 
-    #    return super(Encuesta, self).save(*args, **kwargs)
+        return super(Encuesta, self).save(*args, **kwargs)
