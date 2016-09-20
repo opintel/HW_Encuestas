@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404, JsonResponse
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
@@ -102,7 +102,7 @@ def eliminar_encuesta_view(request, id):
         raise Http404
 
     encuesta.delete()
-    return JsonResponse({'status': 'ok'})
+    return redirect('/encuestas/administrador/')
 
 
 @login_required(login_url='/encuestas/usuarios/login/')
