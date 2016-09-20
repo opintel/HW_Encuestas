@@ -40,6 +40,7 @@
                         <th>Publicada</th>
                         <th>Abierta</th>
                         <th>Resultados</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,6 +69,11 @@
                         <td>
                             <a href="/encuestas/administrador/resultados/{{encuesta.slug}}/">
                                 <span class="glyphicon glyphicon-zoom-in" style="margin-left: 25px;"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/encuestas/administrador/eliminar-encuesta/{{encuesta.id}}/">
+                                <span class="glyphicon glyphicon-remove" style="margin-left: 25px; color: red;"></span>
                             </a>
                         </td>
                     </tr>

@@ -89,6 +89,23 @@ def crear_encuesta_view(request):
 
 
 @login_required(login_url='/encuestas/usuarios/login/')
+def eliminar_encuesta_view(request, id):
+    """
+    Vista del admin en datos.gob
+    donde se pueden eliminar una encuesta
+    URL: /encuestas/administrador/eliminar-encuesta/{id}/
+    METODOS: GET
+    """
+    try:
+        encuesta = Encuesta.objects.get(id=id)
+    except:
+        raise Http404
+
+    encuesta.delete()
+    return JsonResponse({'status': 'ok'})
+
+
+@login_required(login_url='/encuestas/usuarios/login/')
 def resultados_admin(request, slug=''):
     """
     Vista del admin en datos.gob
