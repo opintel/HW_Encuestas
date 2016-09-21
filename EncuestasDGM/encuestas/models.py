@@ -21,7 +21,7 @@ class Respuesta(EmbeddedDocument):
 
     def save(self, *args, **kwargs):
         if not self.fecha:
-            self.fecha = timezone.localtime(timezone.now())
+            self.fecha = timezone.now().replace(tzinfo=pytz.utc)
 
         return super(Respuesta, self).save(*args, **kwargs)
 

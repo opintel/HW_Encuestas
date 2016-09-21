@@ -122,7 +122,6 @@ def resultados_admin(request, slug=''):
 
     estatus = error = ''
 
-
     return render(request, 'encuestas/administrador/resultados_encuesta.html', {'encuesta': encuesta})
 
 
