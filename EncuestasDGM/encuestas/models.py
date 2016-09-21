@@ -16,7 +16,7 @@ class Pregunta(EmbeddedDocument):
 class Respuesta(EmbeddedDocument):
     pregunta = StringField(max_length=300, required=True)
     valor = StringField(max_length=500, required=False)
-    fecha = DateTimeField(default=timezone.localtime(timezone.now()))
+    fecha = DateTimeField(required=True)
     hash_respuesta = StringField(max_length=200)
 
     def save(self, *args, **kwargs):
@@ -29,8 +29,8 @@ class Encuesta(Document):
     titulo = StringField(max_length=200, required=True)
     slug = StringField(max_length=250, required=True)
     encabezado = StringField(max_length=500, required=True)
-    fecha_creacion = DateTimeField(default=timezone.localtime(timezone.now()))
-    fecha_modificacion = DateTimeField(default=timezone.localtime(timezone.now()))
+    fecha_creacion = DateTimeField(required=True)
+    fecha_modificacion = DateTimeField(required=False)
     publicada = BooleanField(default=False)
     abierta = BooleanField(default=False)
     preguntas = ListField(EmbeddedDocumentField(Pregunta))
