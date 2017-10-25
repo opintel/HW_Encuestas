@@ -11,8 +11,8 @@ application = get_wsgi_application()
 from django.contrib.auth.models import User
 
 if __name__ == "__main__":
-    print "Creacion de administrador"
+    print("Creacion de administrador")
     admin = User.objects.create_user(username="adminEncuestas", password="pass{0}".format(datetime.datetime.now().strftime('%Y%m%d')))
     admin.is_staff = True
-    print "Usuario: adminEncuestas"
+    print("Usuario: adminEncuestas")
     admin.save()

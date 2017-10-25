@@ -82,7 +82,7 @@ def contestar_encuesta(encuesta, respuestas):
     # Agrupacion de objetos Respuesta en un array
     for respuesta in respuestas:
         valida_campos_respuesta(respuesta, encuesta=encuesta)
-        pregunta = Respuesta(pregunta=respuesta['pregunta'], valor=respuesta['valor'], hash_respuesta=hashlib.sha224(datetime.now().strftime("%y%m%d%s")).hexdigest())
+        pregunta = Respuesta(pregunta=respuesta['pregunta'], valor=respuesta['valor'], hash_respuesta=hashlib.sha224(datetime.now().strftime("%y%m%d%s").encode("utf-8")).hexdigest())
         respuestas_array_objetos.append(pregunta)
 
     # Responder encuesta y guardar en base de datos
@@ -141,16 +141,17 @@ def valida_campos_respuesta(respuesta, encuesta=None):
     una Respuesta en base de datos
     Return: Bool
     """
+    if not 'valor' in respuesta.keys():
+        raise Exception("Se necesita responder la pregunta {0}".format(respuesta.get('pregunta', '')))
+
     if not str(respuesta.get('valor', '').encode('utf-8')).strip():
-        raise Exception("Se necesita responder la pregunta {0}".format(respuesta.get('pregunta', '').encode('utf-8')))
+        raise Exception("Se necesita responder la pregunta {0}".format(respuesta.get('pregunta', '')))
 
     if not respuesta.get('pregunta', ''):
         raise Exception("Se necesita una pregunta para la respuesta")
 
     if encuesta:
         if not any([pregunta.texto == respuesta['pregunta'] for pregunta in encuesta.preguntas]):
-            print pregunta.texto
-            print respuesta['pregunta']
             raise Exception("La pregunta no existe en la encuesta")
 
     return True

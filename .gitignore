@@ -1,2 +1,3 @@
 *.pyc
 EncuestasDGM/functional_test.py
+config.sh

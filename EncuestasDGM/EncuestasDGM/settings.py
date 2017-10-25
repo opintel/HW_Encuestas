@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [os.environ.get('HOST_DOMAIN')]
 
@@ -63,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'encuestas.context_processors.context_settings'
             ],
         },
     },
@@ -131,5 +132,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/')
 ]
 
+CDN_GOB_ROOT_URL = os.environ.get('CDN_GOB_ROOT_URL', '//cdn.datos.gob.mx/')
 # MOONGO ENGINE CONFIG
 connect(os.environ.get('MONGO_DB'), host=os.environ.get('MONGOENCUESTAS_PORT_27017_TCP_ADDR'), port=int(os.environ.get('MONGOENCUESTAS_PORT_27017_TCP_PORT')))

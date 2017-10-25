@@ -49,15 +49,21 @@ Los comandos de consola para correr la aplicacion con toda la arquitectura neces
   docker run --name postgres-encuesta -e POSTGRES_PASSWORD={{securepass}} -e POSTGRES_USER={{db_user}} -e POSTGRES_DB={{db}} -p 5433:5432 -d postgres
   docker run --name mongo-encuestas -p 27017:27017 -d mongo
   docker run --name encuestas \
-        -e POSTGRES_HOST="{{host}}" \
-        -e POSTGRES_PORT="{{port}}" \
-        -e MONGO_DB="{{mongo_db}}" \
-        -e SECRET_KEY='{{tu_secret_key}}' \
-        --link postgres-encuesta:postgresencuesta \
-        --link mongo-encuestas:mongoencuestas \
-        -p 8001:8001 \
-        -d encuestas
-
+      -e SECRET_KEY="se1308#valor" \
+      -e DEBUG="valor" \
+      -e HOST_DOMAIN="valor" \
+      -e POSTGRESENCUESTA_ENV_POSTGRES_DB="valor" \
+      -e POSTGRESENCUESTA_ENV_POSTGRES_USER="valor" \
+      -e POSTGRESENCUESTA_ENV_POSTGRES_PASSWORD="valor" \
+      -e POSTGRESENCUESTA_PORT_5432_TCP_ADDR="valor" \
+      -e POSTGRESENCUESTA_PORT_5432_TCP_PORT="valor" \
+      -e MONGO_DB="valor" \
+      -e MONGOENCUESTAS_PORT_27017_TCP_ADDR="valor" \
+      -e MONGOENCUESTAS_PORT_27017_TCP_PORT="valor" \
+      --link postgres-encuesta:postgresencuesta \
+      --link mongo-encuestas:mongoencuestas \
+      -p 8001:8001 \
+      -d encuestas
 ```
 
 Despues en la barra del navegador:

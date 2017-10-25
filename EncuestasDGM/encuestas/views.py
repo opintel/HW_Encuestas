@@ -55,7 +55,7 @@ def editar_encuesta(request, slug=''):
         try:
             if modificar_encuesta(encuesta, request.POST.get('titulo', ''), request.POST.get('encabezado', ''), json.loads(request.POST.get('preguntas', [])), request.POST.get('publicada', False), request.POST.get('abierta', False)) is not None:
                 estatus = 'ok'
-        except Exception, e:
+        except Exception as e:
             # Capura del error para feedback
             error = e
             estatus = 'error'
@@ -79,7 +79,7 @@ def crear_encuesta_view(request):
         try:
             encuesta = crear_encuesta(request.POST.get('titulo', ''), request.POST.get('encabezado', ''), json.loads(request.POST.get('preguntas', '[]')), request.POST.get('publicada', False), request.POST.get('abierta', False))
             estatus = 'ok'
-        except Exception, e:
+        except Exception as e:
             # Se regresan los errores de la validacion
             error = e
             estatus = 'error'
@@ -134,6 +134,7 @@ def responder_encuesta(request, slug=''):
     METODOS: POST, GET
     PARAMETROS_POST: respuestas = [{'pregunta', 'valor'}]
     """
+    error = ""
     if not slug.strip():
         raise Http404
 
@@ -150,9 +151,9 @@ def responder_encuesta(request, slug=''):
         try:
             encuesta = contestar_encuesta(encuesta, json.loads(request.POST.get('respuestas', [])))
             estatus = 'ok'
-        except Exception, e:
+        except Exception as err:
             estatus = 'error'
-            error = e
+            error = err
         return JsonResponse({'error': str(error), 'estatus': estatus})
 
     return render(request, 'encuestas/responder.html', {'encuesta': encuesta})

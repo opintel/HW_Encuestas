@@ -9,11 +9,14 @@
     <link rel="shortcut icon" href="img/favicon.ico">
     <link rel="stylesheet" href="http://datos.gob.mx/static/css/vendor.2107989e.css">
     <link rel="stylesheet" href="http://datos.gob.mx/static/css/style.4a96c47a.css">
+    {% comment %}
+    <link rel="stylesheet" href="/static/encuestas/css/style.css?1232" type="text/css">
+    {% endcomment %}
     <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css">
     {% block css_links %}{% endblock %}
-    <link rel="import" href="http://datos.gob.mx/static/bower_components/polymer/polymer.html">
-    <link rel="import" href="http://datos.gob.mx/static/bower_components/dgm-navbar/dgm-navbar.html">
-    <link rel="import" href="http://datos.gob.mx/static/bower_components/dgm-footer/dgm-footer.html">
+    <link rel="import" href="{{settings.CDN_GOB_ROOT_URL}}bower_components/polymer/polymer.html">
+    <link rel="import" href="{{settings.CDN_GOB_ROOT_URL}}bower_components/dgm-navbar/dgm-navbar.html">
+    <link rel="import" href="{{settings.CDN_GOB_ROOT_URL}}bower_components/dgm-footer/dgm-footer.html">
 </head>
 <body class="front">
     <div id="main" ui-view="application" class="ng-scope">
@@ -47,7 +50,7 @@
                         {% block content %}{% endblock content %}                        
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
     <dgm-footer></dgm-footer>

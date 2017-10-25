@@ -1,4 +1,4 @@
-FROM python:2-alpine
+FROM python:3-alpine
 MAINTAINER Francisco Vaquero <akura11.tt@gmail.com>
 
 RUN apk add git bash postgresql-dev gcc musl-dev python-dev --update-cache && rm -rf /var/cache/apk/*
