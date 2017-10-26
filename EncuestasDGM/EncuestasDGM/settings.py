@@ -133,5 +133,6 @@ STATICFILES_DIRS = [
 ]
 
 CDN_GOB_ROOT_URL = os.environ.get('CDN_GOB_ROOT_URL', '//cdn.datos.gob.mx/')
+
 # MOONGO ENGINE CONFIG
 connect(os.environ.get('MONGO_DB'), host=os.environ.get('MONGOENCUESTAS_PORT_27017_TCP_ADDR'), port=int(os.environ.get('MONGOENCUESTAS_PORT_27017_TCP_PORT')))
